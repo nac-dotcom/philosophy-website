@@ -1,7 +1,8 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Radio,
   Phone,
@@ -55,21 +56,43 @@ const fadeSlideUp = {
   },
 };
 
+const heroImages = [
+  "/images/hero1.jpg",
+  "/images/hero2.jpg",
+  "/images/hero3.jpg",
+];
+
 export default function Home() {
+  const [heroIndex, setHeroIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setHeroIndex((prev) => (prev + 1) % heroImages.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <>
       <Navbar />
 
       {/* ─── HERO ─── */}
       <section className="relative min-h-dvh flex items-center overflow-hidden">
-        {/* Background image */}
+        {/* Background image slideshow */}
         <div className="absolute inset-0">
-          <img
-            src="/images/hero-philosophy.jpg"
-            alt="خلفية فلسفية"
-            className="w-full h-full object-cover"
-            loading="eager"
-          />
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={heroImages[heroIndex]}
+              src={heroImages[heroIndex]}
+              alt="خلفية فلسفية"
+              className="w-full h-full object-cover"
+              loading="eager"
+              initial={{ opacity: 0, scale: 1.05 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.05 }}
+              transition={{ duration: 1.4, ease: [0.25, 0.1, 0.25, 1] }}
+            />
+          </AnimatePresence>
         </div>
 
         {/* Overlay layers */}
