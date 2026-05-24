@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Radio,
   Phone,
@@ -64,10 +64,21 @@ const heroImages = [
 
 export default function Home() {
   const [heroIndex, setHeroIndex] = useState(0);
+  const [fadingOutImage, setFadingOutImage] = useState<string | null>(null);
+  const [fading, setFading] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setHeroIndex((prev) => (prev + 1) % heroImages.length);
+      setHeroIndex((prev) => {
+        const next = (prev + 1) % heroImages.length;
+        setFadingOutImage(heroImages[prev]);
+        setFading(true);
+        setTimeout(() => {
+          setFading(false);
+          setFadingOutImage(null);
+        }, 1200);
+        return next;
+      });
     }, 5000);
     return () => clearInterval(timer);
   }, []);
@@ -80,43 +91,47 @@ export default function Home() {
       <section className="relative min-h-dvh flex items-center overflow-hidden">
         {/* Background image slideshow */}
         <div className="absolute inset-0">
-          <AnimatePresence mode="wait">
-            <motion.img
-              key={heroImages[heroIndex]}
-              src={heroImages[heroIndex]}
+          <img
+            src={heroImages[heroIndex]}
+            alt="خلفية فلسفية"
+            className="absolute inset-0 w-full h-full object-cover"
+            loading="eager"
+          />
+          {fadingOutImage && (
+            <img
+              src={fadingOutImage}
               alt="خلفية فلسفية"
-              className="w-full h-full object-cover"
+              className={`absolute inset-0 w-full h-full object-cover transition-all duration-[1.2s] ease-in-out ${
+                fading ? "opacity-0 scale-105" : "opacity-100 scale-100"
+              }`}
               loading="eager"
-              initial={{ opacity: 0, scale: 1.05 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.05 }}
-              transition={{ duration: 1.4, ease: [0.25, 0.1, 0.25, 1] }}
             />
-          </AnimatePresence>
+          )}
         </div>
 
-        {/* Overlay layers */}
-        <div className="absolute inset-0 bg-gradient-to-t from-midnight-900 via-midnight-900/70 to-midnight-900/40" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(212,168,75,0.08)_0%,transparent_70%)]" />
+        {/* Cinematic overlay layers */}
+        <div className="absolute inset-0 bg-gradient-to-t from-midnight-900 via-midnight-900/75 to-midnight-900/30" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(214,169,74,0.06)_0%,transparent_70%)]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-midnight-900/60 via-transparent to-transparent" />
         <FloatingShapes />
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8 pt-28 pb-20">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8 pt-32 lg:pt-36 pb-20">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Text content */}
             <motion.div
               variants={stagger}
               initial="hidden"
               animate="visible"
             >
-              <motion.div variants={fadeSlideUp} className="mb-4">
-                <span className="inline-block text-[10px] tracking-[0.25em] text-gold/40 font-heading font-semibold uppercase">
+              <motion.div variants={fadeSlideUp} className="mb-6">
+                <span className="inline-block text-[11px] tracking-[0.2em] text-gold/50 font-heading font-semibold">
                   مشروع الفلسفة للجميع
                 </span>
               </motion.div>
 
               <motion.h1
                 variants={fadeSlideUp}
-                className="heading-xl text-balance mb-6"
+                className="heading-xl text-balance mb-8"
               >
                 <span className="text-gradient-gold">الضيافة المدرسية</span>
                 <br />
@@ -125,7 +140,7 @@ export default function Home() {
 
               <motion.p
                 variants={fadeSlideUp}
-                className="text-ivory/70 text-base md:text-lg max-w-xl leading-relaxed mb-10 font-light"
+                className="text-ivory/65 text-base md:text-lg max-w-xl leading-relaxed mb-12 font-light"
               >
                 مشروع تربوي ثقافي يهدف إلى جعل الفلسفة أسلوب حياة في المدرسة،
                 عبر برامج مبتكرة تجمع بين الحوار والمسرح والإعلام الرقمي،
@@ -134,14 +149,14 @@ export default function Home() {
 
               <motion.div
                 variants={fadeSlideUp}
-                className="flex flex-wrap gap-4"
+                className="flex flex-wrap gap-5"
               >
                 <Link href="#programs" className="btn-primary">
-                  <Sparkles size={16} />
+                  <Sparkles size={18} />
                   اكتشف برامجنا
                 </Link>
                 <Link href="#vision" className="btn-outline">
-                  <ArrowLeft size={16} />
+                  <ArrowLeft size={18} />
                   رؤيتنا
                 </Link>
               </motion.div>
@@ -160,19 +175,19 @@ export default function Home() {
                 <svg viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full relative z-10">
                   <defs>
                     <linearGradient id="hero-grad" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stopColor="#d4a84b" stopOpacity="0.15" />
-                      <stop offset="100%" stopColor="#d4a84b" stopOpacity="0.05" />
+                      <stop offset="0%" stopColor="#D6A94A" stopOpacity="0.15" />
+                      <stop offset="100%" stopColor="#D6A94A" stopOpacity="0.05" />
                     </linearGradient>
                   </defs>
-                  <circle cx="250" cy="250" r="240" stroke="#d4a84b" strokeOpacity="0.12" strokeWidth="0.5" />
-                  <circle cx="250" cy="250" r="220" stroke="#d4a84b" strokeOpacity="0.08" strokeWidth="0.5" strokeDasharray="3 6" />
-                  <circle cx="250" cy="250" r="200" stroke="#d4a84b" strokeOpacity="0.12" strokeWidth="0.5" />
-                  <circle cx="250" cy="250" r="170" stroke="#d4a84b" strokeOpacity="0.06" strokeWidth="0.5" strokeDasharray="2 4" />
-                  <circle cx="250" cy="250" r="140" stroke="#d4a84b" strokeOpacity="0.12" strokeWidth="0.5" />
-                  <circle cx="250" cy="250" r="80" fill="url(#hero-grad)" stroke="#d4a84b" strokeOpacity="0.15" strokeWidth="0.5" />
-                  <path d="M220 230 Q250 210 250 190 Q250 210 280 230" stroke="#d4a84b" strokeOpacity="0.25" strokeWidth="1.2" fill="none" />
-                  <path d="M220 230 L220 270 Q250 255 250 250 Q250 255 280 270 L280 230" stroke="#d4a84b" strokeOpacity="0.25" strokeWidth="1.2" fill="none" />
-                  <line x1="250" y1="190" x2="250" y2="250" stroke="#d4a84b" strokeOpacity="0.15" strokeWidth="0.8" />
+                  <circle cx="250" cy="250" r="240" stroke="#D6A94A" strokeOpacity="0.12" strokeWidth="0.5" />
+                  <circle cx="250" cy="250" r="220" stroke="#D6A94A" strokeOpacity="0.08" strokeWidth="0.5" strokeDasharray="3 6" />
+                  <circle cx="250" cy="250" r="200" stroke="#D6A94A" strokeOpacity="0.12" strokeWidth="0.5" />
+                  <circle cx="250" cy="250" r="170" stroke="#D6A94A" strokeOpacity="0.06" strokeWidth="0.5" strokeDasharray="2 4" />
+                  <circle cx="250" cy="250" r="140" stroke="#D6A94A" strokeOpacity="0.12" strokeWidth="0.5" />
+                  <circle cx="250" cy="250" r="80" fill="url(#hero-grad)" stroke="#D6A94A" strokeOpacity="0.15" strokeWidth="0.5" />
+                  <path d="M220 230 Q250 210 250 190 Q250 210 280 230" stroke="#D6A94A" strokeOpacity="0.25" strokeWidth="1.2" fill="none" />
+                  <path d="M220 230 L220 270 Q250 255 250 250 Q250 255 280 270 L280 230" stroke="#D6A94A" strokeOpacity="0.25" strokeWidth="1.2" fill="none" />
+                  <line x1="250" y1="190" x2="250" y2="250" stroke="#D6A94A" strokeOpacity="0.15" strokeWidth="0.8" />
                 </svg>
               </div>
             </motion.div>
@@ -183,13 +198,14 @@ export default function Home() {
       {/* ─── VISION ─── */}
       <section id="vision" className="relative py-28 md:py-40">
         <div className="absolute inset-0 bg-dark-glow" />
+        <div className="absolute inset-0 bg-midnight-800/30" />
         <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8">
           <SectionHeader
             title="رؤيتنا"
             subtitle="نؤمن بأن الفلسفة ليست مجرد مادة دراسية، بل هي طريقة للتفكير والعيش. نسعى إلى خلق بيئة مدرسية تحتضن التساؤل والحوار والتأمل."
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-16">
             {[
               { num: "٠١", title: "التفكير الناقد", desc: "ننمي القدرة على التحليل والنقد البناء لدى التلاميذ" },
               { num: "٠٢", title: "الحوار المتحضر", desc: "نخلق فضاءات آمنة للحوار والتبادل الفكري" },
@@ -202,16 +218,18 @@ export default function Home() {
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.7, delay: i * 0.12, ease: [0.25, 0.1, 0.25, 1] }}
               >
-                <div className="glass rounded-2xl p-8 md:p-10 text-center group hover:border-gold/20 transition-all duration-500 h-full">
-                  <span className="block text-3xl font-heading font-bold text-gold/20 group-hover:text-gold/40 transition-colors duration-500 mb-6">
-                    {item.num}
-                  </span>
-                  <h3 className="text-xl font-heading font-bold text-ivory/80 mb-3">
-                    {item.title}
-                  </h3>
-                  <p className="text-ivory/50 text-sm leading-relaxed">
-                    {item.desc}
-                  </p>
+                <div className="card-premium group h-full">
+                  <div className="relative z-10 flex flex-col items-center text-center gap-5">
+                    <span className="block text-4xl font-heading font-bold text-gold/15 group-hover:text-gold/35 transition-colors duration-500">
+                      {item.num}
+                    </span>
+                    <h3 className="text-xl font-heading font-bold text-ivory/85 group-hover:text-gold transition-colors duration-500">
+                      {item.title}
+                    </h3>
+                    <p className="text-ivory/50 text-sm leading-relaxed group-hover:text-ivory/65 transition-colors duration-500">
+                      {item.desc}
+                    </p>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -239,6 +257,7 @@ export default function Home() {
       {/* ─── MEDIA ─── */}
       <section id="media" className="relative py-28 md:py-40">
         <div className="absolute inset-0 bg-dark-glow" />
+        <div className="absolute inset-0 bg-midnight-800/20" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
           <SectionHeader
             title="المحتوى الإعلامي"
@@ -257,6 +276,7 @@ export default function Home() {
       <section id="contact" className="relative py-28 md:py-40 overflow-hidden">
         <div className="absolute inset-0 bg-mesh-gradient" />
         <div className="absolute inset-0 bg-dark-glow" />
+        <div className="absolute inset-0 bg-midnight-800/10" />
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -265,19 +285,21 @@ export default function Home() {
           transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
           className="relative z-10 max-w-3xl mx-auto px-6 lg:px-8 text-center"
         >
-          <SectionHeader
-            title="انضم إلينا"
-            subtitle="كن جزءاً من مشروعنا الفلسفي التربوي. تواصل معنا للمشاركة أو الدعم أو الاستفسار."
-          />
+          <div className="card-premium cursor-default p-12 md:p-16">
+            <SectionHeader
+              title="انضم إلينا"
+              subtitle="كن جزءاً من مشروعنا الفلسفي التربوي. تواصل معنا للمشاركة أو الدعم أو الاستفسار."
+            />
 
-          <div className="flex flex-wrap justify-center gap-4 mt-10">
-            <Link href="/#" className="btn-primary">
-              <Sparkles size={16} />
-              تواصل معنا
-            </Link>
-            <Link href="/#programs" className="btn-outline">
-              استكشف البرامج
-            </Link>
+            <div className="flex flex-wrap justify-center gap-5 mt-12">
+              <Link href="/#" className="btn-primary">
+                <Sparkles size={18} />
+                تواصل معنا
+              </Link>
+              <Link href="/#programs" className="btn-outline">
+                استكشف البرامج
+              </Link>
+            </div>
           </div>
         </motion.div>
       </section>

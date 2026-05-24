@@ -20,7 +20,7 @@ export default function RadioPage() {
             transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
             className="text-center mb-20"
           >
-            <div className="w-16 h-16 rounded-2xl bg-gold/[0.06] border border-gold/10 flex items-center justify-center mx-auto mb-6">
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-gold/[0.1] to-gold/[0.03] border border-gold/[0.12] shadow-[0_0_20px_-8px_rgba(214,169,74,0.1)] flex items-center justify-center mx-auto mb-6">
               <Radio className="w-8 h-8 text-gold/70" />
             </div>
             <h1 className="heading-lg text-gradient-gold mb-4">راديو الفلسفة</h1>
@@ -48,9 +48,9 @@ export default function RadioPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="mt-16 glass rounded-2xl p-8 md:p-12"
+            className="mt-16 card-premium p-8 md:p-12 cursor-default"
           >
-            <h2 className="heading-md text-gold/80 mb-4">مقالات وموارد</h2>
+            <h2 className="heading-md text-gold mb-4">مقالات وموارد</h2>
             <p className="text-ivory/50 leading-relaxed">
               المحتوى قيد الإعداد. سنضيف قريباً مقالات فلسفية وموارد تعليمية تتعلق براديو الفلسفة.
             </p>

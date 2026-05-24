@@ -16,28 +16,29 @@ const programLinks = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/[0.04] bg-midnight-800/50">
+    <footer className="bg-midnight-900 relative" style={{ backgroundImage: 'radial-gradient(ellipse at 50% 0%, rgba(214,169,74,0.03) 0%, transparent 60%)' }}>
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 md:py-28">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
-          <div className="lg:col-span-4">
-            <h3 className="text-2xl font-heading font-bold text-gradient-gold mb-5">
+          <div className="lg:col-span-4 lg:pl-12">
+            <h3 className="text-2xl md:text-3xl font-heading font-bold text-gradient-gold mb-5">
               الفلسفة للجميع
             </h3>
-            <p className="text-ivory/50 leading-relaxed text-sm max-w-xs">
+            <p className="text-ivory/45 leading-relaxed text-sm max-w-sm">
               مشروع تربوي ثقافي يهدف إلى نشر التفكير الفلسفي عبر وسائل عصرية مبتكرة.
             </p>
           </div>
 
           <div className="lg:col-span-3">
-            <h4 className="text-gold/80 font-heading font-semibold text-xs tracking-[0.15em] mb-6 uppercase">
+            <h4 className="text-gold/70 font-heading font-semibold text-xs mb-6">
               البرامج
             </h4>
-            <ul className="space-y-3">
+            <ul className="space-y-3.5">
               {programLinks.slice(0, 6).map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-ivory/50 hover:text-gold/70 transition-colors text-sm"
+                    className="text-ivory/45 hover:text-gold transition-colors duration-300 text-sm"
                   >
                     {link.label}
                   </Link>
@@ -47,15 +48,15 @@ export default function Footer() {
           </div>
 
           <div className="lg:col-span-3">
-            <h4 className="text-gold/80 font-heading font-semibold text-xs tracking-[0.15em] mb-6 uppercase">
+            <h4 className="text-gold/70 font-heading font-semibold text-xs mb-6">
               المزيد
             </h4>
-            <ul className="space-y-3">
+            <ul className="space-y-3.5">
               {programLinks.slice(6).map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-ivory/50 hover:text-gold/70 transition-colors text-sm"
+                    className="text-ivory/45 hover:text-gold transition-colors duration-300 text-sm"
                   >
                     {link.label}
                   </Link>
@@ -65,27 +66,27 @@ export default function Footer() {
           </div>
 
           <div className="lg:col-span-2">
-            <h4 className="text-gold/80 font-heading font-semibold text-xs tracking-[0.15em] mb-6 uppercase">
+            <h4 className="text-gold/70 font-heading font-semibold text-xs mb-6">
               روابط
             </h4>
-            <ul className="space-y-3">
+            <ul className="space-y-3.5">
               <li>
-                <Link href="/#vision" className="text-ivory/40 hover:text-gold/70 transition-colors text-sm">
+                <Link href="/#vision" className="text-ivory/40 hover:text-gold transition-colors duration-300 text-sm">
                   الرؤية
                 </Link>
               </li>
               <li>
-                <Link href="/#programs" className="text-ivory/40 hover:text-gold/70 transition-colors text-sm">
+                <Link href="/#programs" className="text-ivory/40 hover:text-gold transition-colors duration-300 text-sm">
                   البرامج
                 </Link>
               </li>
               <li>
-                <Link href="/#media" className="text-ivory/40 hover:text-gold/70 transition-colors text-sm">
+                <Link href="/#media" className="text-ivory/40 hover:text-gold transition-colors duration-300 text-sm">
                   المحتوى
                 </Link>
               </li>
               <li>
-                <Link href="/#contact" className="text-ivory/40 hover:text-gold/70 transition-colors text-sm">
+                <Link href="/#contact" className="text-ivory/40 hover:text-gold transition-colors duration-300 text-sm">
                   تواصل
                 </Link>
               </li>
@@ -96,10 +97,10 @@ export default function Footer() {
         <div className="divider-gold-gradient mt-16 mb-8" />
 
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-ivory/30 text-xs tracking-wide">
+          <p className="text-ivory/25 text-xs">
             © {new Date().getFullYear()} الفلسفة للجميع. جميع الحقوق محفوظة.
           </p>
-          <p className="text-ivory/20 text-xs">
+          <p className="text-ivory/15 text-xs">
             مشروع تربوي ثقافي
           </p>
         </div>

@@ -24,7 +24,7 @@ export default function SectionHeader({ title, subtitle }: SectionHeaderProps) {
           {subtitle}
         </p>
       )}
-      <div className="divider-gold mt-6" />
+      <div className="divider-gold mt-8" />
     </motion.div>
   );
 }

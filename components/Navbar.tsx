@@ -39,8 +39,8 @@ export default function Navbar() {
         hidden ? "-translate-y-full opacity-0 pointer-events-none" : "translate-y-0 opacity-100"
       } ${
         scrolled
-          ? "backdrop-blur-2xl bg-midnight-900/80 border-b border-white/[0.04]"
-          : "bg-transparent"
+          ? "backdrop-blur-2xl bg-midnight-900/85 shadow-[0_1px_0_rgba(214,169,74,0.08)]"
+          : "bg-gradient-to-b from-midnight-900/60 to-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -52,15 +52,15 @@ export default function Navbar() {
             الفلسفة للجميع
           </Link>
 
-          <div className="hidden md:flex items-center gap-10">
+          <div className="hidden md:flex items-center gap-12">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-ivory/60 hover:text-gold transition-colors duration-300 text-sm tracking-wide font-medium relative group"
+                className="text-ivory/65 hover:text-gold transition-colors duration-300 text-sm font-medium relative group py-1"
               >
                 {link.label}
-                <span className="absolute -bottom-1 left-0 right-0 h-px bg-gold/50 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-right" />
+                <span className="absolute -bottom-1 left-0 right-0 h-[1.5px] bg-gold/60 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-right rounded-full" />
               </Link>
             ))}
           </div>
@@ -88,7 +88,7 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="text-ivory/60 hover:text-gold transition-colors text-base tracking-wide"
+                  className="text-ivory/60 hover:text-gold transition-colors text-base"
                 >
                   {link.label}
                 </Link>
