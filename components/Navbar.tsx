@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -15,9 +15,20 @@ const navLinks = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const prevScrollY = useRef(0);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => {
+      const sy = window.scrollY;
+      setScrolled(sy > 40);
+      if (sy > 80 && sy > prevScrollY.current) {
+        setHidden(true);
+      } else {
+        setHidden(false);
+      }
+      prevScrollY.current = sy;
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -25,6 +36,8 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        hidden ? "-translate-y-full opacity-0 pointer-events-none" : "translate-y-0 opacity-100"
+      } ${
         scrolled
           ? "backdrop-blur-2xl bg-midnight-900/80 border-b border-white/[0.04]"
           : "bg-transparent"
