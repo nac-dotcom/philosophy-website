@@ -62,9 +62,20 @@ export default function Home() {
 
       {/* ─── HERO ─── */}
       <section className="relative min-h-dvh flex items-center overflow-hidden">
+        {/* Background image */}
+        <div className="absolute inset-0">
+          <img
+            src="/images/hero-philosophy.jpg"
+            alt="خلفية فلسفية"
+            className="w-full h-full object-cover"
+            loading="eager"
+          />
+        </div>
+
+        {/* Overlay layers */}
+        <div className="absolute inset-0 bg-gradient-to-t from-midnight-900 via-midnight-900/70 to-midnight-900/40" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(212,168,75,0.08)_0%,transparent_70%)]" />
         <FloatingShapes />
-        <div className="absolute inset-0 bg-gradient-to-b from-midnight-900/0 via-midnight-900/50 to-midnight-900" />
-        <div className="absolute inset-0 bg-dark-glow" />
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8 pt-28 pb-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -113,9 +124,9 @@ export default function Home() {
               </motion.div>
             </motion.div>
 
-            {/* Hero illustration */}
+            {/* Right side - decorative book illustration */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1], delay: 0.3 }}
               className="hidden lg:flex items-center justify-center"
@@ -123,7 +134,6 @@ export default function Home() {
               <div className="relative w-[420px] h-[420px] xl:w-[500px] xl:h-[500px]">
                 {/* Glow behind */}
                 <div className="absolute inset-0 rounded-full bg-gold/[0.04] blur-3xl" />
-                {/* Main circles */}
                 <svg viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full relative z-10">
                   <defs>
                     <linearGradient id="hero-grad" x1="0" y1="0" x2="1" y2="1">
@@ -131,55 +141,15 @@ export default function Home() {
                       <stop offset="100%" stopColor="#d4a84b" stopOpacity="0.05" />
                     </linearGradient>
                   </defs>
-                  {/* Outer rings */}
                   <circle cx="250" cy="250" r="240" stroke="#d4a84b" strokeOpacity="0.12" strokeWidth="0.5" />
                   <circle cx="250" cy="250" r="220" stroke="#d4a84b" strokeOpacity="0.08" strokeWidth="0.5" strokeDasharray="3 6" />
                   <circle cx="250" cy="250" r="200" stroke="#d4a84b" strokeOpacity="0.12" strokeWidth="0.5" />
                   <circle cx="250" cy="250" r="170" stroke="#d4a84b" strokeOpacity="0.06" strokeWidth="0.5" strokeDasharray="2 4" />
                   <circle cx="250" cy="250" r="140" stroke="#d4a84b" strokeOpacity="0.12" strokeWidth="0.5" />
-                  {/* Central filled circle */}
                   <circle cx="250" cy="250" r="80" fill="url(#hero-grad)" stroke="#d4a84b" strokeOpacity="0.15" strokeWidth="0.5" />
-                  {/* Open book shape */}
                   <path d="M220 230 Q250 210 250 190 Q250 210 280 230" stroke="#d4a84b" strokeOpacity="0.25" strokeWidth="1.2" fill="none" />
                   <path d="M220 230 L220 270 Q250 255 250 250 Q250 255 280 270 L280 230" stroke="#d4a84b" strokeOpacity="0.25" strokeWidth="1.2" fill="none" />
                   <line x1="250" y1="190" x2="250" y2="250" stroke="#d4a84b" strokeOpacity="0.15" strokeWidth="0.8" />
-                  {/* Radial lines */}
-                  {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => {
-                    const rad = (deg * Math.PI) / 180;
-                    return (
-                      <line
-                        key={deg}
-                        x1={250 + 145 * Math.cos(rad)}
-                        y1={250 + 145 * Math.sin(rad)}
-                        x2={250 + 195 * Math.cos(rad)}
-                        y2={250 + 195 * Math.sin(rad)}
-                        stroke="#d4a84b"
-                        strokeOpacity="0.08"
-                        strokeWidth="0.5"
-                      />
-                    );
-                  })}
-                  {/* Small dots on outer ring */}
-                  {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((deg) => {
-                    const rad = (deg * Math.PI) / 180;
-                    return (
-                      <circle
-                        key={deg}
-                        cx={250 + 200 * Math.cos(rad)}
-                        cy={250 + 200 * Math.sin(rad)}
-                        r="2"
-                        fill="#d4a84b"
-                        fillOpacity="0.2"
-                      />
-                    );
-                  })}
-                  {/* Floating particles */}
-                  <circle cx="120" cy="100" r="1.5" fill="#d4a84b" fillOpacity="0.15" />
-                  <circle cx="380" cy="80" r="1" fill="#d4a84b" fillOpacity="0.1" />
-                  <circle cx="400" cy="350" r="2" fill="#d4a84b" fillOpacity="0.12" />
-                  <circle cx="100" cy="380" r="1.5" fill="#d4a84b" fillOpacity="0.08" />
-                  <circle cx="250" cy="30" r="1" fill="#d4a84b" fillOpacity="0.15" />
-                  <circle cx="250" cy="470" r="1.5" fill="#d4a84b" fillOpacity="0.1" />
                 </svg>
               </div>
             </motion.div>
