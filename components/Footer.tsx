@@ -16,7 +16,7 @@ const programLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-midnight-900 relative" style={{ backgroundImage: 'radial-gradient(ellipse at 50% 0%, rgba(214,169,74,0.03) 0%, transparent 60%)' }}>
+    <footer className="bg-midnight-800 relative">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 md:py-28">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">

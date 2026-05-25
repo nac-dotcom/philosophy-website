@@ -39,8 +39,8 @@ export default function Navbar() {
         hidden ? "-translate-y-full opacity-0 pointer-events-none" : "translate-y-0 opacity-100"
       } ${
         scrolled
-          ? "backdrop-blur-2xl bg-midnight-900/85 shadow-[0_1px_0_rgba(214,169,74,0.08)]"
-          : "bg-gradient-to-b from-midnight-900/60 to-transparent"
+          ? "backdrop-blur-2xl bg-white/85 shadow-[0_1px_0_rgba(200,155,60,0.12)]"
+          : "bg-gradient-to-b from-white/40 to-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -57,7 +57,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-ivory/65 hover:text-gold transition-colors duration-300 text-sm font-medium relative group py-1"
+                className="text-ivory-muted/80 hover:text-gold transition-colors duration-300 text-sm font-medium relative group py-1"
               >
                 {link.label}
                 <span className="absolute -bottom-1 left-0 right-0 h-[1.5px] bg-gold/60 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-right rounded-full" />
@@ -67,7 +67,7 @@ export default function Navbar() {
 
           <button
             onClick={() => setOpen(!open)}
-            className="md:hidden text-gold/80 hover:text-gold p-2 transition-colors"
+            className="md:hidden text-gold hover:text-gold-dark p-2 transition-colors"
           >
             {open ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -80,7 +80,7 @@ export default function Navbar() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="md:hidden overflow-hidden border-t border-white/[0.04] backdrop-blur-2xl bg-midnight-900/95"
+            className="md:hidden overflow-hidden border-t border-midnight-600/30 bg-white/95 backdrop-blur-2xl"
           >
             <div className="flex flex-col p-8 gap-5">
               {navLinks.map((link) => (
@@ -88,7 +88,7 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="text-ivory/60 hover:text-gold transition-colors text-base"
+                  className="text-ivory-muted/80 hover:text-gold transition-colors text-base"
                 >
                   {link.label}
                 </Link>

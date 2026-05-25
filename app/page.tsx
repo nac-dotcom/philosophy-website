@@ -110,9 +110,9 @@ export default function Home() {
         </div>
 
         {/* Cinematic overlay layers */}
-        <div className="absolute inset-0 bg-gradient-to-t from-midnight-900 via-midnight-900/75 to-midnight-900/30" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(214,169,74,0.06)_0%,transparent_70%)]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-midnight-900/60 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(200,155,60,0.08)_0%,transparent_70%)]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent" />
         <FloatingShapes />
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8 pt-32 lg:pt-36 pb-20">
